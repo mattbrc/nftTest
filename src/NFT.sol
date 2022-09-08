@@ -1,9 +1,10 @@
-// SPDX-License-Identifier: UNLICENSED
-pragma solidity >=0.8.10;
+// SPDX-License-Identifier: MIT
+pragma solidity ^0.8.13;
 
 import "solmate/tokens/ERC721.sol";
-import "openzeppelin-contracts/contracts/utils/Strings.sol";
-import "openzeppelin-contracts/contracts/access/Ownable.sol";
+import "forge-std/console.sol";
+import "@openzeppelin/contracts/utils/Strings.sol";
+import "@openzeppelin/contracts/access/Ownable.sol";
 
 error MintPriceNotPaid();
 error MaxSupply();
@@ -34,6 +35,7 @@ contract NFT is ERC721, Ownable {
             revert MaxSupply();
         }
         _safeMint(recipient, newTokenId);
+        console.log("value sent: ", msg.value);
         return newTokenId;
     }
 
